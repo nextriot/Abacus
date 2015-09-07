@@ -29,11 +29,11 @@ struct Tables {
   }
   
   struct ParticipantPositions {
-    let won: Bool
-    let name: String
-    let position: Int
-    let winning: Bool
-    let score: Int
+    var won: Bool
+    var name: String
+    var position: Int
+    var winning: Bool
+    var score: Int
     
     init(won: Bool, name: String, position: Int, winning: Bool, score: Int) {
       self.won = won

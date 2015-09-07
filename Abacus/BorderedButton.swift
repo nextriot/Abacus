@@ -22,17 +22,16 @@ class BorderedButton: UIButton {
   override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
     super.touchesBegan(touches, withEvent: event)
     
-    UIView.animateWithDuration(0.2) {
+    UIView.animateWithDuration(0.1) {
       self.backgroundColor = Constants.Colors.Fuchsia
       self.setTitleColor(.whiteColor(), forState: .Normal)
     }
-    
   }
   
   override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
     super.touchesEnded(touches, withEvent: event)
     
-    UIView.animateWithDuration(0.2) {
+    UIView.animateWithDuration(0.1) {
       self.backgroundColor = .clearColor()
       self.setTitleColor(Constants.Colors.Fuchsia, forState: .Normal)
     }
@@ -41,12 +40,12 @@ class BorderedButton: UIButton {
   override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
     super.touchesCancelled(touches, withEvent: event)
     
-    UIView.animateWithDuration(0.2) {
+    UIView.animateWithDuration(0.1) {
       self.backgroundColor = .clearColor()
       self.setTitleColor(Constants.Colors.Fuchsia, forState: .Normal)
     }
   }
 
-
+  
 
 }

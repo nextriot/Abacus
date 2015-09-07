@@ -348,6 +348,7 @@
                                         </constraints>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
+                                            <outlet property="changeNameButton" destination="U87-ZB-Sf6" id="RQO-Dc-HT7"/>
                                             <outlet property="playerNameLabel" destination="KVe-9z-nHc" id="pwq-0W-6sV"/>
                                             <outlet property="playerPositionLabel" destination="oDR-LM-jv1" id="CvT-Ud-mEF"/>
                                             <outlet property="playerScoreLabel" destination="APQ-kB-IzE" id="OEH-uU-X7h"/>

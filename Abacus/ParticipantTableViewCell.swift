@@ -9,6 +9,8 @@
 import UIKit
 
 class ParticipantTableViewCell: UITableViewCell {
+  
+  @IBOutlet weak var changeNameButton: BorderedButton!
 
   @IBOutlet weak var playerPositionLabel: UILabel! {
     didSet {

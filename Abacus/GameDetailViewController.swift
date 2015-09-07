@@ -78,6 +78,11 @@ class GameDetailViewController: UIViewController {
     })()
     return String(Int(playerPosition))
   }
+  
+  func indexPathForCellContainingView(view: UIView, inTableView tableView: UITableView) -> NSIndexPath? {
+    let viewCenterRelativeToTableview = tableView.convertPoint(CGPoint(x: CGRectGetMidX(view.bounds), y: CGRectGetMidY(view.bounds)), fromView:view)
+    return tableView.indexPathForRowAtPoint(viewCenterRelativeToTableview)
+  }
 
     /*
     // MARK: - Navigation
@@ -121,6 +126,61 @@ extension GameDetailViewController: UITableViewDelegate {
       participantCell.playerPositionLabel.text = playerPosition
       participantCell.playerScoreLabel.text = String(participant.score)
       participantCell.updatePlayerPositionLabel(Int(playerPosition) == 1)
+      
+      participantCell.changeNameButton.addTarget(self, action: "promptNameChangeAlert:event:", forControlEvents: .TouchUpInside)
+    }
+  }
+  
+}
+
+// MARK: - Add Target Methods
+extension GameDetailViewController {
+  
+  func promptNameChangeAlert(sender: BorderedButton, event: UIControlEvents) {
+    let indexPath = indexPathForCellContainingView(sender, inTableView: tableView)
+    
+    if let _indexPath = indexPath {
+      let cell = tableView.cellForRowAtIndexPath(_indexPath) as! ParticipantTableViewCell
+      
+      let namePrompt = UIAlertController(title: "Edit name", message: "You are editing \(cell.playerNameLabel.text!)'s name:", preferredStyle: UIAlertControllerStyle.Alert)
+      
+      let confirmAction = UIAlertAction(title: "Done", style: .Default, handler: { (action: UIAlertAction) in
+        let textField = namePrompt.textFields?.first
+        self.changePlayerName(textField, indexPath: _indexPath)
+      })
+      let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+      
+      namePrompt.addAction(confirmAction)
+      namePrompt.addAction(cancelAction)
+      
+      namePrompt.addTextFieldWithConfigurationHandler({ (textField: UITextField!) in
+        textField.placeholder = "New Name"
+        textField.addTarget(self, action: "validateTextField:", forControlEvents: .EditingChanged)
+      })
+      
+      confirmAction.enabled = false
+      presentViewController(namePrompt, animated: true, completion: nil)
+    }
+  }
+  
+  
+  
+  func changePlayerName(textField: UITextField?, indexPath: NSIndexPath) {
+    
+    if let _textField = textField {
+      participantData[indexPath.row].name = _textField.text!
+      tableView.reloadData()
+    }
+
+  }
+  
+  func validateTextField(sender: UITextField) {
+    let alertController = presentedViewController as? UIAlertController
+    
+    if (alertController != nil) {
+      let login = alertController?.textFields?.first
+      let confirmAction = alertController?.actions.first
+      confirmAction?.enabled = login?.text?.characters.count > 0
     }
   }
   
