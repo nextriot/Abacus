@@ -40,7 +40,7 @@ class OverviewViewController: UIViewController, ModalDelegate {
     fabView = FabButtonView(iconName: "icon-plus", superView: summaryView, mainView: view)
     fabView.delegate = self
 //    presentGameOptions()
-//    presentGame()
+    presentGame()
   }
   
   override func viewWillAppear(animated: Bool) {
